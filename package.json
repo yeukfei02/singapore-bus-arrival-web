@@ -1,0 +1,32 @@
+{
+  "name": "svelte-app",
+  "version": "0.1.0",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "git-cz": "^4.7.6",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.32",
+    "sirv-cli": "^1.0.0",
+    "standard-version": "^9.0.0",
+    "svelte-material-ui": "^1.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.0.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0"
+  },
+  "scripts": {
+    "dev": "rollup -c -w",
+    "production": "yarn run build && yarn run start",
+    "build": "rollup -c",
+    "start": "sirv public",
+    "commit": "git-cz",
+    "release": "standard-version"
+  }
+}
