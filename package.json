@@ -8,8 +8,7 @@
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.32",
     "sirv-cli": "^1.0.0",
-    "standard-version": "^9.0.0",
-    "svelte-material-ui": "^1.0.0"
+    "standard-version": "^9.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^16.0.0",
