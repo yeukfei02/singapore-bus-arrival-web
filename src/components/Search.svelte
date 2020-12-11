@@ -2,6 +2,9 @@
     import axios from 'axios';
     import { getRootUrl } from '../common/common.js';
 
+    import Card, {Content, Actions } from '@smui/card';
+    import IconButton, { Icon } from '@smui/icon-button';
+
     const ROOT_URL = getRootUrl();
 
     let roadName = '';
@@ -111,6 +114,50 @@
         return result;
     }
 
+    const addFavourites = async (installationId, item) => {
+        let result = null;
+
+        const response = await axios.post(`${ROOT_URL}`, 
+            { 
+                query: `
+                    query busArrival ($busStopCode: String!) {
+                        busArrival (busStopCode: $busStopCode) {
+                            busStopCode
+                            services {
+                                busNumber
+                                operator
+                                nextBus {
+                                    estimatedArrival
+                                    latitude
+                                    longitude
+                                    load
+                                    feature
+                                    type
+                                }
+                            }
+                        }
+                    }
+                `,
+                variables: {
+                    data: {
+                        installationId: installationId,
+                        item: item
+                    }
+                }
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+        if (response) {
+            result = response.data;
+        }
+
+        return result;
+    }
+
     const handleRoadNameInputChange = (e) => {
         if (e.target.value) {
             roadName = e.target.value;
@@ -154,40 +201,18 @@
     const handleOpenInMapClick = (latitude, longitude) => {
         window.open(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
     }
+
+    const handleAddFavourites = (installationId, item) => {
+        const result = addFavourites(installationId, item);
+        console.log('result = ', result);
+    }
 </script>
 
 <style>
-    .viewContainer {
-        max-width: 65em;
-    }
 
-    .descriptionText {
-        font-size: 25;
-        font-weight: bold;
-    }
-
-    .roadNameText {
-        font-size: 20;
-        font-weight: bold;
-    }
-    
-    .busStopCodeText {
-        font-size: 28;
-    }
-
-    .busStopCodeResultText {
-        font-size: 28;
-        color: red;
-        text-decoration: underline;
-    }
-
-    .openInMapText {
-        color: blue;
-        text-decoration: underline;
-    }
 </style>
 
-<div class="container viewContainer">
+<div class="container">
     <div class="card">
         <div class="card-body">
             <form>
@@ -215,14 +240,20 @@
             {#if data.data.busStopByRoadName}
                 {#each data.data.busStopByRoadName as item, i }
                     <div class="container my-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="descriptionText my-2">{item.description}</div>
-                                <div class="roadNameText my-2">{item.roadName}</div>
-                                <div class="busStopCodeText my-2">Bus Stop Code: <span class="busStopCodeResultText hoverItem" on:click={() => handleBusStopCodeClick(item.busStopCode)}>{item.busStopCode}</span></div>
-                                <span class="openInMapText hoverItem my-2" on:click={() => handleOpenInMapClick(item.latitude, item.longitude)}>Open in map</span>
-                            </div>
-                        </div>
+                        <Card>
+                            <Content>
+                                <div class="my-2" style="font-size: 1.5em; font-weight: bold;">{item.description}</div>
+                                <div class="my-2" style="font-size: 1.2em; font-weight: bold;">{item.roadName}</div>
+                                <div class="my-2" style="font-size: 1.2em;">Bus Stop Code: <span class="hoverItem" style="font-size: 1.2em; color: red; text-decoration: underline;" on:click={() => handleBusStopCodeClick(item.busStopCode)}>{item.busStopCode}</span></div>
+                                <span class="hoverItem my-2" style="color: blue; text-decoration: underline;" on:click={() => handleOpenInMapClick(item.latitude, item.longitude)}>Open in map</span>
+                            </Content>
+                            <Actions>
+                                <IconButton on:click={() => handleAddFavourites('', item)} toggle aria-label="Add to favorites" title="Add to favorites">
+                                    <Icon class="material-icons" on>favorite</Icon>
+                                    <Icon class="material-icons">favorite_border</Icon>
+                                </IconButton>
+                            </Actions>
+                        </Card>
                     </div>
                 {/each}
             {/if}
@@ -240,14 +271,20 @@
             {#if data.data.busStopByDescription}
                 {#each data.data.busStopByDescription as item, i }
                     <div class="container my-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="descriptionText my-2">{item.description}</div>
-                                <div class="roadNameText my-2">{item.roadName}</div>
-                                <div class="busStopCodeText my-2">Bus Stop Code: <span class="busStopCodeResultText hoverItem" on:click={() => handleBusStopCodeClick(item.busStopCode)}>{item.busStopCode}</span></div>
-                                <span class="openInMapText hoverItem my-2" on:click={() => handleOpenInMapClick(item.latitude, item.longitude)}>Open in map</span>
-                            </div>
-                        </div>
+                        <Card>
+                            <Content>
+                                <div class="my-2" style="font-size: 1.5em; font-weight: bold;">{item.description}</div>
+                                <div class="my-2" style="font-size: 1.2em; font-weight: bold;">{item.roadName}</div>
+                                <div class="my-2" style="font-size: 1.2em;">Bus Stop Code: <span class="hoverItem" style="font-size: 1.2em; color: red; text-decoration: underline;" on:click={() => handleBusStopCodeClick(item.busStopCode)}>{item.busStopCode}</span></div>
+                                <span class="hoverItem my-2" style="color: blue; text-decoration: underline;" on:click={() => handleOpenInMapClick(item.latitude, item.longitude)}>Open in map</span>
+                            </Content>
+                            <Actions>
+                                <IconButton on:click={handleAddFavourites} toggle aria-label="Add to favorites" title="Add to favorites">
+                                    <Icon class="material-icons" on>favorite</Icon>
+                                    <Icon class="material-icons">favorite_border</Icon>
+                                </IconButton>
+                            </Actions>
+                        </Card>
                     </div>
                 {/each}
             {/if}

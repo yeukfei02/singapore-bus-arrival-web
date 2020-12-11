@@ -3,11 +3,9 @@
 </script>
 
 <style>
-	.viewContainer {
-        max-width: 65em;
-    }
+    
 </style>
 
-<div class="container viewContainer">
+<div class="container">
     Settings
 </div>

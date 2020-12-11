@@ -17,13 +17,13 @@
 </script>
 
 <style>
-
+	
 </style>
 
 <div>
 	<NavBar />
 
-	<div style="margin: 2.5em">
+	<div style="margin: 2.5em auto; max-width: 50em;">
 		{#if currentPageValue === 'nearme'}
 			<Nearme />
 		{:else if currentPageValue === 'search'}
