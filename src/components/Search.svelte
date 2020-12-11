@@ -1,6 +1,7 @@
 <script>
     import axios from 'axios';
     import { getRootUrl, getUniqueId } from '../common/common.js';
+    import { currentPageStore, busStopCodeStore } from '../store.js';
 
     import Card, {Content, Actions } from '@smui/card';
     import IconButton, { Icon } from '@smui/icon-button';
@@ -65,45 +66,6 @@
                     }
                 `,
                 variables: { description: place }
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-        );
-        if (response) {
-            result = response.data;
-        }
-
-        return result;
-    }
-
-    const getBusArrival = async (busStopCode) => {
-        let result = null;
-
-        const response = await axios.post(`${ROOT_URL}`, 
-            { 
-                query: `
-                    query busArrival ($busStopCode: String!) {
-                        busArrival (busStopCode: $busStopCode) {
-                            busStopCode
-                            services {
-                                busNumber
-                                operator
-                                nextBus {
-                                    estimatedArrival
-                                    latitude
-                                    longitude
-                                    load
-                                    feature
-                                    type
-                                }
-                            }
-                        }
-                    }
-                `,
-                variables: { busStopCode: busStopCode }
             },
             {
                 headers: {
@@ -184,10 +146,8 @@
     }
 
     const handleBusStopCodeClick = (busStopCode) => {
-        if (busStopCode) {
-            const result = getBusArrival(busStopCode);
-            console.log('result = ', result);
-        }
+        currentPageStore.set('busArrivalDetails');
+        busStopCodeStore.set(busStopCode);
     }
 
     const handleOpenInMapClick = (latitude, longitude) => {

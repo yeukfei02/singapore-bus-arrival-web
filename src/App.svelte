@@ -4,6 +4,7 @@
 	import Search from './components/Search.svelte';
 	import Favourites from './components/Favourites.svelte';
 	import Settings from './components/Settings.svelte';
+	import BusArrivalDetails from './components/BusArrivalDetails.svelte';
 
 	import { currentPageStore } from './store.js';
 
@@ -32,6 +33,8 @@
 			<Favourites />
 		{:else if currentPageValue === 'settings'}
 			<Settings />
+		{:else if currentPageValue === 'busArrivalDetails'}
+			<BusArrivalDetails />
 		{/if}
 	</div>
 </div>
