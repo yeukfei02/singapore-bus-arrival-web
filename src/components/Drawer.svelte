@@ -1,13 +1,13 @@
-<script>
-    import { currentPageStore } from '../store.js';
+<script lang="ts">
+    import { currentPageStore } from '../store';
     import Drawer, { Content, Header, Title, Subtitle } from '@smui/drawer';
 	import List, { Item, Text } from '@smui/list';
 
 	let current = 'nearme';
-	let drawer;
-    export let drawerOpen;
+	let drawer: any;
+    export let drawerOpen: any;
     
-    const handleNavBarItemClick = (currentPage) => {
+    const handleNavBarItemClick = (currentPage: string) => {
 		currentPageStore.set(currentPage);
         current = currentPage;
         drawerOpen = false;

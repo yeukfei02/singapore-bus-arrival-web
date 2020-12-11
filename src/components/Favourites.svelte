@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
     import axios from 'axios';
-    import { getRootUrl, getUniqueId } from '../common/common.js';
+    import { getRootUrl, getUniqueId } from '../common/common';
     import { onMount } from "svelte";
-    import { currentPageStore, busStopCodeStore } from '../store.js';
+    import { currentPageStore, busStopCodeStore } from '../store';
 
     import Card, {Content, Actions } from '@smui/card';
     import IconButton from '@smui/icon-button';
@@ -13,7 +13,7 @@
 
     let getFavouritesByInstallationIdResult = null;
 
-    let snackbar;
+    let snackbar: any;
     let snackbarTitle = '';
 
     const installationId = getUniqueId();
@@ -24,7 +24,7 @@
         getFavouritesByInstallationIdResult = result;
     });
 
-    const getFavouritesByInstallationId = async (installationId) => {
+    const getFavouritesByInstallationId = async (installationId: string) => {
         let result = null;
 
         const response = await axios.post(`${ROOT_URL}`, 
@@ -61,7 +61,7 @@
         return result;
     }
 
-    const deleteFavouritesById = async (id, installationId) => {
+    const deleteFavouritesById = async (id: string, installationId: string) => {
         let result = null;
 
         const response = await axios.post(`${ROOT_URL}`, 
@@ -93,16 +93,16 @@
         return result;
     }
 
-    const handleBusStopCodeClick = (busStopCode) => {
+    const handleBusStopCodeClick = (busStopCode: string) => {
         currentPageStore.set('busArrivalDetails');
         busStopCodeStore.set(busStopCode);
     }
 
-    const handleOpenInMapClick = (latitude, longitude) => {
+    const handleOpenInMapClick = (latitude: number, longitude: number) => {
         window.open(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
     }
 
-    const handleDeleteButtonClick = (id, installationId) => {
+    const handleDeleteButtonClick = (id: string, installationId: string) => {
         const result = deleteFavouritesById(id, installationId);
         console.log('result = ', result);
 
@@ -137,7 +137,7 @@
             </div>
         {:then data}
             {#if data.data.getFavouritesByInstallationId}
-                {#each data.data.getFavouritesByInstallationId as item, i }
+                {#each data.data.getFavouritesByInstallationId as item }
                     <div class="container my-4">
                         <Card>
                             <Content>

@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
     import axios from 'axios';
-    import { getRootUrl, getUniqueId } from '../common/common.js';
-    import { currentPageStore, busStopCodeStore } from '../store.js';
+    import { getRootUrl, getUniqueId } from '../common/common';
+    import { currentPageStore, busStopCodeStore } from '../store';
 
     import Card, {Content, Actions } from '@smui/card';
     import IconButton, { Icon } from '@smui/icon-button';
@@ -19,10 +19,10 @@
     let getBusStopByRoadNameResult = null;
     let getBusStopByDescriptionResult = null;
 
-    let snackbar;
+    let snackbar: any;
     let snackbarTitle = '';
 
-    const getBusStopByRoadName = async (roadName) => {
+    const getBusStopByRoadName = async (roadName: string) => {
         let result = null;
 
         const response = await axios.post(`${ROOT_URL}`, 
@@ -53,7 +53,7 @@
         return result;
     }
 
-    const getBusStopByDescription = async (place) => {
+    const getBusStopByDescription = async (place: string) => {
         let result = null;
 
         const response = await axios.post(`${ROOT_URL}`, 
@@ -84,7 +84,7 @@
         return result;
     }
 
-    const addFavourites = async (installationId, item) => {
+    const addFavourites = async (installationId: string, item: any) => {
         let result = null;
 
         const response = await axios.post(`${ROOT_URL}`, 
@@ -116,14 +116,14 @@
         return result;
     }
 
-    const handleRoadNameInputChange = (e) => {
+    const handleRoadNameInputChange = (e: any) => {
         if (e.target.value) {
             roadName = e.target.value;
             place = '';
         }
     }
 
-    const handlePlaceInputChange = (e) => {
+    const handlePlaceInputChange = (e: any) => {
         if (e.target.value) {
             place = e.target.value;
             roadName = '';
@@ -149,16 +149,16 @@
         }
     }
 
-    const handleBusStopCodeClick = (busStopCode) => {
+    const handleBusStopCodeClick = (busStopCode: string) => {
         currentPageStore.set('busArrivalDetails');
         busStopCodeStore.set(busStopCode);
     }
 
-    const handleOpenInMapClick = (latitude, longitude) => {
+    const handleOpenInMapClick = (latitude: number, longitude: number) => {
         window.open(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
     }
 
-    const handleAddFavourites = (installationId, item) => {
+    const handleAddFavourites = (installationId: string, item: any) => {
         const result = addFavourites(installationId, item);
         console.log('result = ', result);
 
@@ -203,7 +203,7 @@
             </div>
         {:then data}
             {#if data.data.busStopByRoadName}
-                {#each data.data.busStopByRoadName as item, i }
+                {#each data.data.busStopByRoadName as item }
                     <div class="container my-4">
                         <Card>
                             <Content>
@@ -234,7 +234,7 @@
             </div>
         {:then data}
             {#if data.data.busStopByDescription}
-                {#each data.data.busStopByDescription as item, i }
+                {#each data.data.busStopByDescription as item }
                     <div class="container my-4">
                         <Card>
                             <Content>

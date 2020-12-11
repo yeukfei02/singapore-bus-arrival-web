@@ -17,6 +17,9 @@ $ yarn run dev
 
 // production
 $ yarn run production
+
+// validate ts
+$ yarn run validate
 ```
 
 open localhost:5000

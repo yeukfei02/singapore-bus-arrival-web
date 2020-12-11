@@ -7,7 +7,7 @@ export const getUniqueId = () => {
   const navigatorInfo = window.navigator;
   const screenInfo = window.screen;
 
-  let uid = navigatorInfo.mimeTypes.length;
+  let uid = navigatorInfo.mimeTypes.length as any;
   uid += navigatorInfo.userAgent.replace(/\D+/g, "");
   uid += navigatorInfo.plugins.length;
   uid += screenInfo.height || "";

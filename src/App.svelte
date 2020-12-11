@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import NavBar from "./components/NavBar.svelte";
 	import Nearme from './components/Nearme.svelte';
 	import Search from './components/Search.svelte';
@@ -6,7 +6,7 @@
 	import Settings from './components/Settings.svelte';
 	import BusArrivalDetails from './components/BusArrivalDetails.svelte';
 
-	import { currentPageStore } from './store.js';
+	import { currentPageStore } from './store';
 
 	let currentPageValue = 'nearme';
 	currentPageStore.subscribe((value) => {

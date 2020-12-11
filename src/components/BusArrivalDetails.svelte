@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
     import axios from 'axios';
     import moment from 'moment';
-    import { getRootUrl } from '../common/common.js';
+    import { getRootUrl } from '../common/common';
     import { onMount } from "svelte";
-    import { currentPageStore, busStopCodeStore } from "../store.js";
+    import { currentPageStore, busStopCodeStore } from "../store";
 
     import Card, { Content } from '@smui/card';
     import IconButton from '@smui/icon-button';
@@ -29,7 +29,7 @@
         }
     });
 
-    const getBusArrival = async (busStopCode) => {
+    const getBusArrival = async (busStopCode: string) => {
         let result = null;
 
         const response = await axios.post(`${ROOT_URL}`, 
@@ -72,7 +72,7 @@
         currentPageStore.set('nearme');
     }
 
-    const handleCheckBusInMapClick = (latitude, longitude) => {
+    const handleCheckBusInMapClick = (latitude: number, longitude: number) => {
         window.open(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
     }
 </script>
@@ -97,7 +97,7 @@
                 <div class="mx-3">
                     <h3>Bus Arrival Details</h3>
                 </div>
-                {#each data.data.busArrival.services as item, i }
+                {#each data.data.busArrival.services as item }
                     <div class="container my-4">
                         <Card>
                             <Content>
