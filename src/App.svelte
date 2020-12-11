@@ -6,7 +6,7 @@
 	import Settings from './components/Settings.svelte';
 	import BusArrivalDetails from './components/BusArrivalDetails.svelte';
 
-	import { currentPageStore } from './store.js';
+	import { currentPageStore } from './store';
 
 	let currentPageValue = 'nearme';
 	currentPageStore.subscribe((value) => {

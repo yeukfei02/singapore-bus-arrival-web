@@ -1,7 +1,7 @@
 <script lang="ts">
     import axios from 'axios';
-    import { getRootUrl, getUniqueId } from '../common/common.js';
-    import { currentPageStore, busStopCodeStore } from '../store.js';
+    import { getRootUrl, getUniqueId } from '../common/common';
+    import { currentPageStore, busStopCodeStore } from '../store';
 
     import Card, {Content, Actions } from '@smui/card';
     import IconButton, { Icon } from '@smui/icon-button';

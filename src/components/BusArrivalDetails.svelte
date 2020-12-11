@@ -1,9 +1,9 @@
 <script lang="ts">
     import axios from 'axios';
     import moment from 'moment';
-    import { getRootUrl } from '../common/common.js';
+    import { getRootUrl } from '../common/common';
     import { onMount } from "svelte";
-    import { currentPageStore, busStopCodeStore } from "../store.js";
+    import { currentPageStore, busStopCodeStore } from "../store";
 
     import Card, { Content } from '@smui/card';
     import IconButton from '@smui/icon-button';

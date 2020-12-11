@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { currentPageStore } from '../store.js';
+	import { currentPageStore } from '../store';
 	import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar';
 	import IconButton from '@smui/icon-button';
 	import Drawer from './Drawer.svelte';

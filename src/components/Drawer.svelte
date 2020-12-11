@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { currentPageStore } from '../store.js';
+    import { currentPageStore } from '../store';
     import Drawer, { Content, Header, Title, Subtitle } from '@smui/drawer';
 	import List, { Item, Text } from '@smui/list';
 
