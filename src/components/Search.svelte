@@ -8,6 +8,7 @@
     import Button, { Label } from '@smui/button';
     import Textfield from '@smui/textfield';
     import HelperText from '@smui/textfield/helper-text/index';
+    import Snackbar from '@smui/snackbar';
 
     const ROOT_URL = getRootUrl();
     const installationId = getUniqueId();
@@ -17,6 +18,9 @@
 
     let getBusStopByRoadNameResult = null;
     let getBusStopByDescriptionResult = null;
+
+    let snackbar;
+    let snackbarTitle = '';
 
     const getBusStopByRoadName = async (roadName) => {
         let result = null;
@@ -157,6 +161,15 @@
     const handleAddFavourites = (installationId, item) => {
         const result = addFavourites(installationId, item);
         console.log('result = ', result);
+
+        if (result) {
+            snackbarTitle = 'Add favourites success!';
+            snackbar.open();
+        }
+    }
+    
+    const handleCloseButtonClick = () => {
+        snackbar.close();
     }
 </script>
 
@@ -242,4 +255,11 @@
             {/if}
         {/await}
     {/if}
+
+    <Snackbar bind:this={snackbar}>
+        <Label>{snackbarTitle}</Label>
+        <Actions>
+            <Button on:click={handleCloseButtonClick}>Close</Button>
+        </Actions>
+    </Snackbar>
 </div>

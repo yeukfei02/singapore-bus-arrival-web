@@ -8,6 +8,7 @@
     import Card, { Content, Actions } from '@smui/card';
     import IconButton, { Icon } from '@smui/icon-button';
     import Button, { Label } from '@smui/button';
+    import Snackbar from '@smui/snackbar';
 
     const ROOT_URL = getRootUrl();
     const installationId = getUniqueId();
@@ -17,6 +18,9 @@
     let pageNumber = 1;
     const singaporeLatitude = 1.3521;
     const singaporeLongitude = 103.8198;
+
+    let snackbar;
+    let snackbarTitle = '';
 
     let getBusStopByLatLongResult = null;
 
@@ -129,6 +133,11 @@
     const handleAddFavourites = (installationId, item) => {
         const result = addFavourites(installationId, item);
         console.log('result = ', result);
+
+        if (result) {
+            snackbarTitle = 'Add favourites success!';
+            snackbar.open();
+        }
     }
 
     const handleShowMoreButtonClick = () => {
@@ -139,6 +148,10 @@
             console.log('result = ', result);
             getBusStopByLatLongResult = result;
         }
+    }
+
+    const handleCloseButtonClick = () => {
+        snackbar.close();
     }
 </script>
 
@@ -187,4 +200,11 @@
             </div>
         </div>
     {/if}
+
+    <Snackbar bind:this={snackbar}>
+        <Label>{snackbarTitle}</Label>
+        <Actions>
+            <Button on:click={handleCloseButtonClick}>Close</Button>
+        </Actions>
+    </Snackbar>
 </div>

@@ -6,10 +6,15 @@
 
     import Card, {Content, Actions } from '@smui/card';
     import IconButton from '@smui/icon-button';
+    import Snackbar from '@smui/snackbar';
+    import Button, { Label } from '@smui/button';
 
     const ROOT_URL = getRootUrl();
 
     let getFavouritesByInstallationIdResult = null;
+
+    let snackbar;
+    let snackbarTitle = '';
 
     const installationId = getUniqueId();
 
@@ -102,12 +107,19 @@
         console.log('result = ', result);
 
         if (result) {
+            snackbarTitle = 'Delete favourite success!';
+            snackbar.open();
+
             setTimeout(() => {
                 const result = getFavouritesByInstallationId(installationId);
                 console.log('result = ', result);
                 getFavouritesByInstallationIdResult = result;
-            }, 1500);
+            }, 1000);
         }
+    }
+
+    const handleCloseButtonClick = () => {
+        snackbar.close();
     }
 </script>
 
@@ -152,4 +164,11 @@
             </div>
         </div>           
     {/if}
+
+    <Snackbar bind:this={snackbar}>
+        <Label>{snackbarTitle}</Label>
+        <Actions>
+            <Button on:click={handleCloseButtonClick}>Close</Button>
+        </Actions>
+    </Snackbar>
 </div>

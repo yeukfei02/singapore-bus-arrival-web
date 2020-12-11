@@ -186,6 +186,24 @@
   dependencies:
     "@material/feature-targeting" "^3.1.0"
 
+"@material/snackbar@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@material/snackbar/-/snackbar-3.2.0.tgz#ca59459d18db2e5f79078554c09a813bca55bd16"
+  integrity sha512-WVA+dJYbzDMlPpXCdkGEQqi1+tHqV8a9tKBYlr4Vy+3UUaEl6gIomRiWNnagoodhOwGQhyugCeLKHtmVn72IZA==
+  dependencies:
+    "@material/animation" "^3.1.0"
+    "@material/base" "^3.1.0"
+    "@material/button" "^3.2.0"
+    "@material/dom" "^3.1.0"
+    "@material/feature-targeting" "^3.1.0"
+    "@material/icon-button" "^3.2.0"
+    "@material/ripple" "^3.2.0"
+    "@material/rtl" "^3.2.0"
+    "@material/shape" "^3.1.0"
+    "@material/theme" "^3.1.0"
+    "@material/typography" "^3.1.0"
+    tslib "^1.9.3"
+
 "@material/textfield@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@material/textfield/-/textfield-3.2.0.tgz#c4272601f9a57f26fd7fce8b3089a5d5d6595ad1"
@@ -367,6 +385,17 @@
   integrity sha512-hx8aOtkiY8eFsMKTaQ++8tWeeu/s5URRIsPg7yk1BlzjKHa9KutiCbBzZXITsNmD2ZCe/wBebTZut41ymkJtRQ==
   dependencies:
     "@material/ripple" "^3.2.0"
+
+"@smui/snackbar@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@smui/snackbar/-/snackbar-1.0.0.tgz#fd24dac8d873888d596873981df625a5a02c3b62"
+  integrity sha512-4atSbUrTaz7wKrGD8ZagOFettrJpzK9auLW7vQ2jajiVLWGto1dt8VckIWs1oCQrpVOvGtTePjfZCzDTqIFf6Q==
+  dependencies:
+    "@material/feature-targeting" "^3.1.0"
+    "@material/snackbar" "^3.2.0"
+    "@smui/button" "^1.0.0"
+    "@smui/common" "^1.0.0"
+    "@smui/icon-button" "^1.0.0"
 
 "@smui/textfield@^1.0.0":
   version "1.0.0"
