@@ -1,11 +1,15 @@
 <script>
     import axios from 'axios';
-    import { getRootUrl } from '../common/common.js';
+    import { getRootUrl, getUniqueId } from '../common/common.js';
 
     import Card, {Content, Actions } from '@smui/card';
     import IconButton, { Icon } from '@smui/icon-button';
+    import Button, { Label } from '@smui/button';
+    import Textfield from '@smui/textfield';
+    import HelperText from '@smui/textfield/helper-text/index';
 
     const ROOT_URL = getRootUrl();
+    const installationId = getUniqueId();
 
     let roadName = '';
     let place = '';
@@ -120,21 +124,9 @@
         const response = await axios.post(`${ROOT_URL}`, 
             { 
                 query: `
-                    query busArrival ($busStopCode: String!) {
-                        busArrival (busStopCode: $busStopCode) {
-                            busStopCode
-                            services {
-                                busNumber
-                                operator
-                                nextBus {
-                                    estimatedArrival
-                                    latitude
-                                    longitude
-                                    load
-                                    feature
-                                    type
-                                }
-                            }
+                    mutation addFavourites ($data: AddFavourites!) {
+                        addFavourites (data: $data) {
+                            status
                         }
                     }
                 `,
@@ -213,21 +205,21 @@
 </style>
 
 <div class="container">
-    <div class="card">
-        <div class="card-body">
-            <form>
-                <div class="mb-3">
-                    <label for="roadName" class="form-label">Roadname</label>
-                    <input type="text" class="form-control" id="roadName" placeholder="Roadname" bind:value={roadName} on:change={handleRoadNameInputChange}>
-                </div>
-                <div class="mb-3">
-                    <label for="place" class="form-label">Place</label>
-                    <input type="text" class="form-control" id="place" placeholder="Place" bind:value={place} on:change={handlePlaceInputChange}>
-                </div>
-                <button type="button" class="btn btn-primary my-2" on:click={handleSumbitButtonClick}>Submit</button>
-            </form>
-        </div>
-    </div>
+    <Card>
+        <Content>
+            <div>
+                <Textfield class="w-100" variant="outlined" bind:value={roadName} on:change={handleRoadNameInputChange} label="Roadname" input$aria-controls="helper-text-outlined-a" input$aria-describedby="helper-text-outlined-a" />
+                <HelperText id="helper-text-outlined-a">Roadname</HelperText>
+            </div>
+            <div>
+                <Textfield class="w-100" variant="outlined" bind:value={place} on:change={handlePlaceInputChange} label="Place" input$aria-controls="helper-text-outlined-a" input$aria-describedby="helper-text-outlined-a" />
+                <HelperText id="helper-text-outlined-a">Place</HelperText>
+            </div>
+            <Actions>
+                <Button class="w-100" on:click={handleSumbitButtonClick} variant="raised"><Label>Submit</Label></Button>
+            </Actions>
+        </Content>
+    </Card>
 
     {#if getBusStopByRoadNameResult}
         {#await getBusStopByRoadNameResult}
@@ -248,7 +240,7 @@
                                 <span class="hoverItem my-2" style="color: blue; text-decoration: underline;" on:click={() => handleOpenInMapClick(item.latitude, item.longitude)}>Open in map</span>
                             </Content>
                             <Actions>
-                                <IconButton on:click={() => handleAddFavourites('', item)} toggle aria-label="Add to favorites" title="Add to favorites">
+                                <IconButton on:click={() => handleAddFavourites(installationId, item)} toggle aria-label="Add to favorites" title="Add to favorites">
                                     <Icon class="material-icons" on>favorite</Icon>
                                     <Icon class="material-icons">favorite_border</Icon>
                                 </IconButton>
@@ -279,7 +271,7 @@
                                 <span class="hoverItem my-2" style="color: blue; text-decoration: underline;" on:click={() => handleOpenInMapClick(item.latitude, item.longitude)}>Open in map</span>
                             </Content>
                             <Actions>
-                                <IconButton on:click={handleAddFavourites} toggle aria-label="Add to favorites" title="Add to favorites">
+                                <IconButton on:click={() => handleAddFavourites(installationId, item)} toggle aria-label="Add to favorites" title="Add to favorites">
                                     <Icon class="material-icons" on>favorite</Icon>
                                     <Icon class="material-icons">favorite_border</Icon>
                                 </IconButton>

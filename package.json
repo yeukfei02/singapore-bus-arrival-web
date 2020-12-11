@@ -7,6 +7,7 @@
     "@smui/drawer": "^1.0.0",
     "@smui/icon-button": "^1.0.0",
     "@smui/list": "^1.0.0",
+    "@smui/textfield": "^1.0.0",
     "@smui/top-app-bar": "^1.0.0",
     "axios": "^0.21.0",
     "git-cz": "^4.7.6",

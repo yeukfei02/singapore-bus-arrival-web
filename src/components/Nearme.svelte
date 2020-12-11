@@ -2,13 +2,14 @@
     import axios from 'axios';
     import _ from 'lodash';
     import { onMount } from 'svelte';
-    import { getRootUrl } from '../common/common.js';
+    import { getRootUrl, getUniqueId } from '../common/common.js';
 
     import Card, { Content, Actions } from '@smui/card';
     import IconButton, { Icon } from '@smui/icon-button';
     import Button, { Label } from '@smui/button';
 
     const ROOT_URL = getRootUrl();
+    const installationId = getUniqueId();
 
     let latitude = 0;
     let longitude = 0;
@@ -128,21 +129,9 @@
         const response = await axios.post(`${ROOT_URL}`, 
             { 
                 query: `
-                    query busArrival ($busStopCode: String!) {
-                        busArrival (busStopCode: $busStopCode) {
-                            busStopCode
-                            services {
-                                busNumber
-                                operator
-                                nextBus {
-                                    estimatedArrival
-                                    latitude
-                                    longitude
-                                    load
-                                    feature
-                                    type
-                                }
-                            }
+                    mutation addFavourites ($data: AddFavourites!) {
+                        addFavourites (data: $data) {
+                            status
                         }
                     }
                 `,
@@ -217,7 +206,7 @@
                                 <span class="hoverItem my-2" style="color: blue; text-decoration: underline;" on:click={() => handleOpenInMapClick(item.latitude, item.longitude)}>Open in map</span>
                             </Content>
                             <Actions>
-                                <IconButton on:click={() => handleAddFavourites('', item)} toggle aria-label="Add to favorites" title="Add to favorites">
+                                <IconButton on:click={() => handleAddFavourites(installationId, item)} toggle aria-label="Add to favorites" title="Add to favorites">
                                     <Icon class="material-icons" on>favorite</Icon>
                                     <Icon class="material-icons">favorite_border</Icon>
                                 </IconButton>

@@ -1,6 +1,6 @@
 <script>
     import axios from 'axios';
-    import { getRootUrl } from '../common/common.js';
+    import { getRootUrl, getUniqueId } from '../common/common.js';
     import { onMount } from "svelte";
 
     import Card, {Content, Actions } from '@smui/card';
@@ -10,8 +10,10 @@
 
     let getFavouritesByInstallationIdResult = null;
 
+    const installationId = getUniqueId();
+
     onMount(async () => {
-        const result = getFavouritesByInstallationId('');
+        const result = getFavouritesByInstallationId(installationId);
         console.log('result = ', result);
         getFavouritesByInstallationIdResult = result;
     });
@@ -140,9 +142,11 @@
         console.log('result = ', result);
 
         if (result) {
-            const result = getFavouritesByInstallationId('');
-            console.log('result = ', result);
-            getFavouritesByInstallationIdResult = result;
+            setTimeout(() => {
+                const result = getFavouritesByInstallationId(installationId);
+                console.log('result = ', result);
+                getFavouritesByInstallationIdResult = result;
+            }, 1500);
         }
     }
 </script>
