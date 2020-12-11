@@ -27,11 +27,11 @@
 <div class="container">
     <Card>
         <Content>
-            <h3>Settings</h3>
+            <!-- <h3>Settings</h3> -->
 
             <div class="my-3">
                 <h3>Singapore Mrt Map</h3>
-                <div class="d-flex flex-row justify-content-around my-3">
+                <div class="d-flex flex-row justify-content-around my-4">
                     <div>
                         <Button class="w-100" on:click={handleCurrentMapButtonClick} variant="raised"><Label>Current Map</Label></Button>
                     </div>
@@ -43,7 +43,7 @@
 
             <div class="my-3">
                 <h3>Report a bug</h3>
-                <div class="d-flex flex-row justify-content-around my-3">
+                <div class="d-flex flex-row justify-content-around my-4">
                     <div>
                         <IconButton class="material-icons" title="Email" on:click={handleEmailButtonClick}>email</IconButton>
                     </div>
