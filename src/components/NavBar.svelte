@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { currentPageStore } from '../store.js';
 	import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar';
 	import IconButton from '@smui/icon-button';
@@ -10,7 +10,7 @@
 
 	let drawerOpen = false;
 
-	const handleNavBarItemClick = (currentPage) => {
+	const handleNavBarItemClick = (currentPage: string) => {
 		currentPageStore.set(currentPage);
 	}
 

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Card, { Content } from '@smui/card';
     import IconButton from '@smui/icon-button';
     import Button, { Label } from '@smui/button';

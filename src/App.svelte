@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import NavBar from "./components/NavBar.svelte";
 	import Nearme from './components/Nearme.svelte';
 	import Search from './components/Search.svelte';

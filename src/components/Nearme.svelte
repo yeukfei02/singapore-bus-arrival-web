@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import axios from 'axios';
     import _ from 'lodash';
     import { onMount } from 'svelte';
@@ -19,7 +19,7 @@
     const singaporeLatitude = 1.3521;
     const singaporeLongitude = 103.8198;
 
-    let snackbar;
+    let snackbar: any;
     let snackbarTitle = '';
 
     let getBusStopByLatLongResult = null;
@@ -32,7 +32,7 @@
         navigator.geolocation.getCurrentPosition(showPosition);
     }
 
-    const showPosition = (position) => {
+    const showPosition = (position: any) => {
         if (position && position.coords) {
             console.log('latitude = ', position.coords.latitude);
             console.log('longitude = ', position.coords.longitude);
@@ -58,7 +58,7 @@
         }
     }
 
-    const getBusStopByLatLong = async (latitude, longitude, pageNumber) => {
+    const getBusStopByLatLong = async (latitude: number, longitude: number, pageNumber: number) => {
         let result = null;
 
         const response = await axios.post(`${ROOT_URL}`, 
@@ -89,7 +89,7 @@
         return result;
     }
 
-    const addFavourites = async (installationId, item) => {
+    const addFavourites = async (installationId: string, item: any) => {
         let result = null;
 
         const response = await axios.post(`${ROOT_URL}`, 
@@ -121,16 +121,16 @@
         return result;
     }
 
-    const handleBusStopCodeClick = (busStopCode) => {
+    const handleBusStopCodeClick = (busStopCode: string) => {
         currentPageStore.set('busArrivalDetails');
         busStopCodeStore.set(busStopCode);
     }
 
-    const handleOpenInMapClick = (latitude, longitude) => {
+    const handleOpenInMapClick = (latitude: number, longitude: number) => {
         window.open(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
     }
 
-    const handleAddFavourites = (installationId, item) => {
+    const handleAddFavourites = (installationId: string, item: any) => {
         const result = addFavourites(installationId, item);
         console.log('result = ', result);
 
