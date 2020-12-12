@@ -1,6 +1,6 @@
 # singapore-bus-arrival-web
 
-singapore-bus-arrival-web
+a web to check singapore bus arrival
 
 ## Requirement:
 
