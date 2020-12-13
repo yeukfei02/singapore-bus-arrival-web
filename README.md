@@ -2,6 +2,8 @@
 
 a web to check singapore bus arrival
 
+url: https://singapore-bus-arrival-web.vercel.app/
+
 ## Requirement:
 
 - install yarn
