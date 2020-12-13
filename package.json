@@ -1,6 +1,6 @@
 {
   "name": "svelte-app",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "dependencies": {
     "@smui/button": "^1.0.0",
     "@smui/card": "^1.0.0",
