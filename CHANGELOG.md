@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.6...v0.1.7) (2020-12-15)
+
+
+### Bug Fixes
+
+* 🐛 fix async await in busArrivaldetails ([de16ed0](https://github.com/yeukfei02/singapore-bus-arrival-web/commit/de16ed06eb565a60a5d77451f2a1d8ffad78cc3f))
+
 ### [0.1.6](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.5...v0.1.6) (2020-12-15)
 
 
