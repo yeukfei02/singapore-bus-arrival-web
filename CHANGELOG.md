@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.5...v0.1.6) (2020-12-15)
+
+
+### Bug Fixes
+
+* 🐛 update rooturl ([a5ec254](https://github.com/yeukfei02/singapore-bus-arrival-web/commit/a5ec254715184e7ed7bf2a4754aec3b9fd6781ae))
+
 ### [0.1.5](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.4...v0.1.5) (2020-12-13)
 
 ### [0.1.4](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.3...v0.1.4) (2020-12-12)
