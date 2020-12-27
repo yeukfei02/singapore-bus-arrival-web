@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.7...v0.1.8) (2020-12-27)
+
+
+### Features
+
+* 🎸 add font family ([d84bc79](https://github.com/yeukfei02/singapore-bus-arrival-web/commit/d84bc79c85c994fe7266ee01c80959a6237fb52b))
+
 ### [0.1.7](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.6...v0.1.7) (2020-12-15)
 
 
