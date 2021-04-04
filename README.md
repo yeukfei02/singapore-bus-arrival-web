@@ -2,16 +2,16 @@
 
 a web to check singapore bus arrival
 
-url: https://singapore-bus-arrival-web.vercel.app/
+url: <https://singapore-bus-arrival-web.vercel.app/>
 
-## Requirement:
+## Requirement
 
 - install yarn
 - install node (v12+)
 
-## Testing and run:
+## Testing and run
 
-```
+```zsh
 $ yarn
 
 // development
