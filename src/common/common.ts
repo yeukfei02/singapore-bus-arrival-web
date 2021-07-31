@@ -1,5 +1,5 @@
 export const getRootUrl = () => {
-  const ROOT_URL = `https://ih4d4hh2ki.execute-api.ap-southeast-1.amazonaws.com/prod/`;
+  const ROOT_URL = `https://73ddoqlmy0.execute-api.ap-southeast-1.amazonaws.com/prod/`;
   return ROOT_URL;
 };
 
