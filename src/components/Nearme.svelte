@@ -37,8 +37,8 @@
             console.log('latitude = ', position.coords.latitude);
             console.log('longitude = ', position.coords.longitude);
             if (
-                _.inRange(position.coords.latitude, singaporeLatitude - 3, singaporeLatitude + 3) &&
-                _.inRange(position.coords.longitude, singaporeLongitude - 3, singaporeLongitude + 3)
+                _.inRange(position.coords.latitude, singaporeLatitude - 0.005, singaporeLatitude + 0.005) &&
+                _.inRange(position.coords.longitude, singaporeLongitude - 0.005, singaporeLongitude + 0.005)
             ) {
                 latitude = position.coords.latitude;
                 longitude = position.coords.longitude;
