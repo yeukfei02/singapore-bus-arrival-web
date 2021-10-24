@@ -7,23 +7,6 @@
   import IconButton from "@smui/icon-button";
   import { LeafletMap, TileLayer, Marker, Popup } from "svelte-leafletjs";
 
-  const singaporeLatitude = 1.3521;
-  const singaporeLongitude = 103.8198;
-
-  const mapOptions = {
-    center: [singaporeLatitude, singaporeLongitude],
-    zoom: 10,
-  };
-  const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-  const tileLayerOptions = {
-    minZoom: 0,
-    maxZoom: 20,
-    maxNativeZoom: 19,
-    attribution: "© OpenStreetMap contributors",
-  };
-
-  let leafletMap;
-
   let busServiceNo = "";
   let getBusServiceByBusServiceNoResult = null;
 
@@ -102,6 +85,23 @@
   const handleBackButtonClick = () => {
     currentPageStore.set("nearme");
   };
+
+  const singaporeLatitude = 1.3521;
+  const singaporeLongitude = 103.8198;
+
+  const mapOptions = {
+    center: [singaporeLatitude, singaporeLongitude],
+    zoom: 10,
+  };
+  const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+  const tileLayerOptions = {
+    minZoom: 0,
+    maxZoom: 20,
+    maxNativeZoom: 19,
+    attribution: "© OpenStreetMap contributors",
+  };
+
+  let leafletMap;
 </script>
 
 <div class="container">
