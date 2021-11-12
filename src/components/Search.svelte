@@ -10,14 +10,16 @@
   import HelperText from "@smui/textfield/helper-text/index";
   import Snackbar from "@smui/snackbar";
 
-  const rootUrl = getRootUrl();
+  const ROOT_URL = getRootUrl();
   const installationId = getUniqueId();
 
   let roadName = "";
   let place = "";
+  let busStopCode = "";
 
   let getBusStopByRoadNameResult = null;
   let getBusStopByDescriptionResult = null;
+  let getBusStopByBusStopCodeResult = null;
 
   let snackbar: any;
   let snackbarTitle = "";
@@ -26,7 +28,7 @@
     let result = null;
 
     const response = await axios.post(
-      `${rootUrl}`,
+      `${ROOT_URL}`,
       {
         query: `
                     query busStopByRoadName ($roadName: String!) {
@@ -58,7 +60,7 @@
     let result = null;
 
     const response = await axios.post(
-      `${rootUrl}`,
+      `${ROOT_URL}`,
       {
         query: `
                     query busStopByDescription ($description: String!) {
@@ -86,11 +88,43 @@
     return result;
   };
 
+  const getBusStopByBusStopCode = async (busStopCode: string) => {
+    let result = null;
+
+    const response = await axios.post(
+      `${ROOT_URL}`,
+      {
+        query: `
+                    query busStopByBusStopCode ($busStopCode: String!) {
+                        busStopByBusStopCode (busStopCode: $busStopCode) {
+                            busStopCode
+                            roadName
+                            description
+                            latitude
+                            longitude
+                        }
+                    }
+                `,
+        variables: { busStopCode: busStopCode },
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response) {
+      result = response.data;
+    }
+
+    return result;
+  };
+
   const addFavourites = async (installationId: string, item: any) => {
     let result = null;
 
     const response = await axios.post(
-      `${rootUrl}`,
+      `${ROOT_URL}`,
       {
         query: `
                     mutation addFavourites ($data: AddFavourites!) {
@@ -123,6 +157,7 @@
     if (e.target.value) {
       roadName = e.target.value;
       place = "";
+      busStopCode = "";
     }
   };
 
@@ -130,12 +165,22 @@
     if (e.target.value) {
       place = e.target.value;
       roadName = "";
+      busStopCode = "";
+    }
+  };
+
+  const handleBusStopCodeInputChange = (e: any) => {
+    if (e.target.value) {
+      roadName = "";
+      place = "";
+      busStopCode = e.target.value;
     }
   };
 
   const handleSumbitButtonClick = () => {
     getBusStopByRoadNameResult = null;
     getBusStopByDescriptionResult = null;
+    getBusStopByBusStopCodeResult = null;
 
     console.log("roadName = ", roadName);
     if (roadName && roadName.length > 3) {
@@ -149,6 +194,13 @@
       const result = getBusStopByDescription(place);
       console.log("result = ", result);
       getBusStopByDescriptionResult = result;
+    }
+
+    console.log("busStopCode = ", busStopCode);
+    if (busStopCode && busStopCode.length > 3) {
+      const result = getBusStopByBusStopCode(busStopCode);
+      console.log("result = ", result);
+      getBusStopByBusStopCodeResult = result;
     }
   };
 
@@ -187,11 +239,11 @@
           variant="outlined"
           bind:value={roadName}
           on:change={handleRoadNameInputChange}
-          label="Roadname"
+          label="Road Name"
           input$aria-controls="helper-text-outlined-a"
           input$aria-describedby="helper-text-outlined-a"
         />
-        <HelperText id="helper-text-outlined-a">Roadname</HelperText>
+        <HelperText id="helper-text-outlined-a">Road Name</HelperText>
       </div>
       <div>
         <Textfield
@@ -204,6 +256,18 @@
           input$aria-describedby="helper-text-outlined-a"
         />
         <HelperText id="helper-text-outlined-a">Place</HelperText>
+      </div>
+      <div>
+        <Textfield
+          class="w-100"
+          variant="outlined"
+          bind:value={busStopCode}
+          on:change={handleBusStopCodeInputChange}
+          label="Bus Stop Code"
+          input$aria-controls="helper-text-outlined-a"
+          input$aria-describedby="helper-text-outlined-a"
+        />
+        <HelperText id="helper-text-outlined-a">Bus Stop Code</HelperText>
       </div>
       <Actions>
         <Button
@@ -274,6 +338,57 @@
     {:then data}
       {#if data.data.busStopByDescription}
         {#each data.data.busStopByDescription as item}
+          <div class="container my-4">
+            <Card>
+              <Content>
+                <div class="my-2" style="font-size: 1.5em; font-weight: bold;">
+                  {item.description}
+                </div>
+                <div class="my-2" style="font-size: 1.2em; font-weight: bold;">
+                  {item.roadName}
+                </div>
+                <div class="my-2" style="font-size: 1.2em;">
+                  Bus Stop Code: <span
+                    class="hoverItem"
+                    style="font-size: 1.2em; color: red; text-decoration: underline;"
+                    on:click={() => handleBusStopCodeClick(item.busStopCode)}
+                    >{item.busStopCode}</span
+                  >
+                </div>
+                <span
+                  class="hoverItem my-2"
+                  style="color: blue; text-decoration: underline;"
+                  on:click={() =>
+                    handleOpenInMapClick(item.latitude, item.longitude)}
+                  >Open in map</span
+                >
+              </Content>
+              <Actions>
+                <IconButton
+                  on:click={() => handleAddFavourites(installationId, item)}
+                  toggle
+                  aria-label="Add to favorites"
+                  title="Add to favorites"
+                >
+                  <Icon class="material-icons" on>favorite</Icon>
+                  <Icon class="material-icons">favorite_border</Icon>
+                </IconButton>
+              </Actions>
+            </Card>
+          </div>
+        {/each}
+      {/if}
+    {/await}
+  {/if}
+
+  {#if getBusStopByBusStopCodeResult}
+    {#await getBusStopByBusStopCodeResult}
+      <div class="container my-4">
+        <div class="alert alert-warning" role="alert">Loading...</div>
+      </div>
+    {:then data}
+      {#if data.data.busStopByBusStopCode}
+        {#each data.data.busStopByBusStopCode as item}
           <div class="container my-4">
             <Card>
               <Content>

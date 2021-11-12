@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.10...v0.1.11) (2021-10-10)
+
+
+### Features
+
+* 🎸 add getBusStopByBusStopCode func ([92bdeff](https://github.com/yeukfei02/singapore-bus-arrival-web/commit/92bdeffc72c32a4278cc4f0764d630c783709517))
+
+### [0.1.10](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.9...v0.1.10) (2021-10-10)
+
+
+### Bug Fixes
+
+* 🐛 update to smaller lat long range ([37181e7](https://github.com/yeukfei02/singapore-bus-arrival-web/commit/37181e76b61122b3f2f6c9d16867305e25522f63))
+
 ### [0.1.9](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.8...v0.1.9) (2021-07-31)
 
 
