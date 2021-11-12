@@ -1,6 +1,6 @@
 <script lang="ts">
   import axios from "axios";
-  import { getRootUrl, getUniqueId } from "../common/common";
+  import { getRootUrl, getUniqueId } from "../helpers/helpers";
   import { currentPageStore, busStopCodeStore } from "../store";
 
   import Card, { Content, Actions } from "@smui/card";

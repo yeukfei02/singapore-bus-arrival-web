@@ -7,7 +7,7 @@ url: <https://singapore-bus-arrival-web.vercel.app/>
 ## Requirement
 
 - install yarn
-- install node (v12+)
+- install node (v14+)
 
 ## Testing and run
 

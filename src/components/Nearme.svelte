@@ -2,7 +2,7 @@
   import axios from "axios";
   import _ from "lodash";
   import { onMount } from "svelte";
-  import { getRootUrl, getUniqueId } from "../common/common";
+  import { getRootUrl, getUniqueId } from "../helpers/helpers";
   import { currentPageStore, busStopCodeStore } from "../store";
 
   import Card, { Content, Actions } from "@smui/card";
@@ -10,7 +10,7 @@
   import Button, { Label } from "@smui/button";
   import Snackbar from "@smui/snackbar";
 
-  const ROOT_URL = getRootUrl();
+  const rootUrl = getRootUrl();
   const installationId = getUniqueId();
 
   let latitude = 0;
@@ -74,7 +74,7 @@
     let result = null;
 
     const response = await axios.post(
-      `${ROOT_URL}`,
+      `${rootUrl}`,
       {
         query: `
                     query busStopByLatLong ($latitude: Float!, $longitude: Float!, $pageNumber: Int!) {
@@ -110,7 +110,7 @@
     let result = null;
 
     const response = await axios.post(
-      `${ROOT_URL}`,
+      `${rootUrl}`,
       {
         query: `
                     mutation addFavourites ($data: AddFavourites!) {
