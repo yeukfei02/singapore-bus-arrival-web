@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.12](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.11...v0.1.12) (2021-11-12)
+
+
+### Bug Fixes
+
+* 🐛 fix rootUrl var and update readme.md ([a19374b](https://github.com/yeukfei02/singapore-bus-arrival-web/commit/a19374bc866d0d586ef110a2ccdb78341252b0af))
+* 🐛 update latitude and longitude range ([7bee06a](https://github.com/yeukfei02/singapore-bus-arrival-web/commit/7bee06a5456cf049639b8029e459b0a58c1a9652))
+
 ### [0.1.11](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.10...v0.1.11) (2021-10-10)
 
 
