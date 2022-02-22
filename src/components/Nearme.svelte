@@ -36,30 +36,15 @@
     if (position && position.coords) {
       console.log("latitude = ", position.coords.latitude);
       console.log("longitude = ", position.coords.longitude);
-      if (
-        _.inRange(
-          position.coords.latitude,
-          singaporeLatitude - 0.05,
-          singaporeLatitude + 0.05
-        ) &&
-        _.inRange(
-          position.coords.longitude,
-          singaporeLongitude - 0.05,
-          singaporeLongitude + 0.05
-        )
-      ) {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
-      } else {
-        latitude = singaporeLatitude;
-        longitude = singaporeLongitude;
-      }
+
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
     } else {
       latitude = singaporeLatitude;
       longitude = singaporeLongitude;
     }
 
-    if (latitude != 0 && longitude != 0) {
+    if (latitude > 0 && longitude > 0) {
       const result = getBusStopByLatLong(latitude, longitude, pageNumber);
       console.log("result = ", result);
       getBusStopByLatLongResult = result;
