@@ -1,6 +1,5 @@
 <script lang="ts">
   import axios from "axios";
-  import _ from "lodash";
   import { onMount } from "svelte";
   import { getRootUrl, getUniqueId } from "../helpers/helpers";
   import { currentPageStore, busStopCodeStore } from "../store";
