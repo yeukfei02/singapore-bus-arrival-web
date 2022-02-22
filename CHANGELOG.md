@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.12...v0.1.13) (2022-02-22)
+
+
+### Bug Fixes
+
+* 🐛 fix lat long ([f80ffbd](https://github.com/yeukfei02/singapore-bus-arrival-web/commit/f80ffbda35f57d82ff1fda1c5c27ff6f4eeef3ce))
+* 🐛 remove not used lib ([7163c45](https://github.com/yeukfei02/singapore-bus-arrival-web/commit/7163c4561c85bb56b9bcfaac5db4e22200f0f506))
+
 ### [0.1.12](https://github.com/yeukfei02/singapore-bus-arrival-web/compare/v0.1.11...v0.1.12) (2021-11-12)
 
 
