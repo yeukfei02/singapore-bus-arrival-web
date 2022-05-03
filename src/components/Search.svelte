@@ -3,6 +3,8 @@
   import { getRootUrl, getUniqueId } from "../helpers/helpers";
   import { currentPageStore, busStopCodeStore } from "../store";
 
+  import Radio from "@smui/radio";
+  import FormField from "@smui/form-field";
   import Card, { Content, Actions } from "@smui/card";
   import IconButton, { Icon } from "@smui/icon-button";
   import Button, { Label } from "@smui/button";
@@ -16,13 +18,27 @@
   let roadName = "";
   let place = "";
   let busStopCode = "";
+  let busService = "";
 
   let getBusStopByRoadNameResult = null;
   let getBusStopByDescriptionResult = null;
   let getBusStopByBusStopCodeResult = null;
+  let getAllBusServicesResult = null;
 
   let snackbar: any;
   let snackbarTitle = "";
+
+  let selected = "Search By Road Name, Place, Bus Stop Code";
+  let options = [
+    {
+      name: "Search By Road Name, Place, Bus Stop Code",
+      disabled: false,
+    },
+    {
+      name: "Search By Bus Service",
+      disabled: false,
+    },
+  ];
 
   const getBusStopByRoadName = async (roadName: string) => {
     let result = null;
@@ -120,6 +136,44 @@
     return result;
   };
 
+  const getAllBusServices = async (busService?: string) => {
+    let result = null;
+
+    const response = await axios.post(
+      `${ROOT_URL}`,
+      {
+        query: `
+                  query allBusService($busServiceNo: String) {
+                      allBusService(busServiceNo: $busServiceNo) {
+                          serviceNo
+                          operator
+                          direction
+                          category
+                          originCode
+                          destinationCode
+                          amPeakFreq
+                          amOffpeakFreq
+                          pmPeakFreq
+                          pmOffpeakFreq
+                          loopDesc
+                      }
+                  }
+                `,
+        variables: { busServiceNo: busService },
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response) {
+      result = response.data;
+    }
+
+    return result;
+  };
+
   const addFavourites = async (installationId: string, item: any) => {
     let result = null;
 
@@ -153,6 +207,17 @@
     return result;
   };
 
+  const handleRadioButtonClick = (e: any) => {
+    selected = e.target.value;
+    console.log("selected = ", selected);
+
+    if (selected === "Search By Bus Service") {
+      const result = getAllBusServices();
+      console.log("result = ", result);
+      getAllBusServicesResult = result;
+    }
+  };
+
   const handleRoadNameInputChange = (e: any) => {
     if (e.target.value) {
       roadName = e.target.value;
@@ -177,7 +242,13 @@
     }
   };
 
-  const handleSumbitButtonClick = () => {
+  const handleBusServiceInputChange = (e: any) => {
+    if (e.target.value) {
+      busService = e.target.value;
+    }
+  };
+
+  const handleSumbitButtonClick = async () => {
     getBusStopByRoadNameResult = null;
     getBusStopByDescriptionResult = null;
     getBusStopByBusStopCodeResult = null;
@@ -201,6 +272,13 @@
       const result = getBusStopByBusStopCode(busStopCode);
       console.log("result = ", result);
       getBusStopByBusStopCodeResult = result;
+    }
+
+    console.log("busService = ", busService);
+    if (busService) {
+      const result = getAllBusServices(busService);
+      console.log("result = ", result);
+      getAllBusServicesResult = result;
     }
   };
 
@@ -231,53 +309,93 @@
 </script>
 
 <div class="container">
-  <Card>
-    <Content>
-      <div>
-        <Textfield
-          class="w-100"
-          variant="outlined"
-          bind:value={roadName}
-          on:change={handleRoadNameInputChange}
-          label="Road Name"
-          input$aria-controls="helper-text-outlined-a"
-          input$aria-describedby="helper-text-outlined-a"
-        />
-        <HelperText id="helper-text-outlined-a">Road Name</HelperText>
-      </div>
-      <div>
-        <Textfield
-          class="w-100"
-          variant="outlined"
-          bind:value={place}
-          on:change={handlePlaceInputChange}
-          label="Place"
-          input$aria-controls="helper-text-outlined-a"
-          input$aria-describedby="helper-text-outlined-a"
-        />
-        <HelperText id="helper-text-outlined-a">Place</HelperText>
-      </div>
-      <div>
-        <Textfield
-          class="w-100"
-          variant="outlined"
-          bind:value={busStopCode}
-          on:change={handleBusStopCodeInputChange}
-          label="Bus Stop Code"
-          input$aria-controls="helper-text-outlined-a"
-          input$aria-describedby="helper-text-outlined-a"
-        />
-        <HelperText id="helper-text-outlined-a">Bus Stop Code</HelperText>
-      </div>
-      <Actions>
-        <Button
-          class="w-100"
-          on:click={handleSumbitButtonClick}
-          variant="raised"><Label>Submit</Label></Button
-        >
-      </Actions>
-    </Content>
-  </Card>
+  {#each options as option}
+    <FormField class="d-flex flex-row my-2">
+      <Radio
+        bind:group={selected}
+        on:click={handleRadioButtonClick}
+        value={option.name}
+        disabled={option.disabled}
+      />
+      <span slot="label" class="mx-3">
+        {option.name}
+      </span>
+    </FormField>
+  {/each}
+
+  {#if selected === "Search By Road Name, Place, Bus Stop Code"}
+    <Card>
+      <Content>
+        <div>
+          <Textfield
+            class="w-100"
+            variant="outlined"
+            bind:value={roadName}
+            on:change={handleRoadNameInputChange}
+            label="Road Name"
+            input$aria-controls="helper-text-outlined-a"
+            input$aria-describedby="helper-text-outlined-a"
+          />
+          <HelperText id="helper-text-outlined-a">Road Name</HelperText>
+        </div>
+        <div>
+          <Textfield
+            class="w-100"
+            variant="outlined"
+            bind:value={place}
+            on:change={handlePlaceInputChange}
+            label="Place"
+            input$aria-controls="helper-text-outlined-a"
+            input$aria-describedby="helper-text-outlined-a"
+          />
+          <HelperText id="helper-text-outlined-a">Place</HelperText>
+        </div>
+        <div>
+          <Textfield
+            class="w-100"
+            variant="outlined"
+            bind:value={busStopCode}
+            on:change={handleBusStopCodeInputChange}
+            label="Bus Stop Code"
+            input$aria-controls="helper-text-outlined-a"
+            input$aria-describedby="helper-text-outlined-a"
+          />
+          <HelperText id="helper-text-outlined-a">Bus Stop Code</HelperText>
+        </div>
+        <Actions>
+          <Button
+            class="w-100"
+            on:click={handleSumbitButtonClick}
+            variant="raised"><Label>Submit</Label></Button
+          >
+        </Actions>
+      </Content>
+    </Card>
+  {:else if selected === "Search By Bus Service"}
+    <Card>
+      <Content>
+        <div>
+          <Textfield
+            class="w-100"
+            variant="outlined"
+            bind:value={busService}
+            on:change={handleBusServiceInputChange}
+            label="Bus Service"
+            input$aria-controls="helper-text-outlined-a"
+            input$aria-describedby="helper-text-outlined-a"
+          />
+          <HelperText id="helper-text-outlined-a">Bus Service</HelperText>
+        </div>
+        <Actions>
+          <Button
+            class="w-100"
+            on:click={handleSumbitButtonClick}
+            variant="raised"><Label>Submit</Label></Button
+          >
+        </Actions>
+      </Content>
+    </Card>
+  {/if}
 
   {#if getBusStopByRoadNameResult}
     {#await getBusStopByRoadNameResult}
@@ -425,6 +543,28 @@
                   <Icon class="material-icons">favorite_border</Icon>
                 </IconButton>
               </Actions>
+            </Card>
+          </div>
+        {/each}
+      {/if}
+    {/await}
+  {/if}
+
+  {#if getAllBusServicesResult}
+    {#await getAllBusServicesResult}
+      <div class="container my-4">
+        <div class="alert alert-warning" role="alert">Loading...</div>
+      </div>
+    {:then data}
+      {#if data && data.data.allBusService}
+        {#each data.data.allBusService as item}
+          <div class="container my-4">
+            <Card>
+              <Content>
+                <div class="my-2" style="font-size: 1.5em; font-weight: bold;">
+                  {item.serviceNo}
+                </div>
+              </Content>
             </Card>
           </div>
         {/each}
