@@ -208,6 +208,11 @@
   };
 
   const handleRadioButtonClick = (e: any) => {
+    getBusStopByRoadNameResult = null;
+    getBusStopByDescriptionResult = null;
+    getBusStopByBusStopCodeResult = null;
+    getAllBusServicesResult = null;
+
     selected = e.target.value;
     console.log("selected = ", selected);
 
@@ -252,6 +257,7 @@
     getBusStopByRoadNameResult = null;
     getBusStopByDescriptionResult = null;
     getBusStopByBusStopCodeResult = null;
+    getAllBusServicesResult = null;
 
     console.log("roadName = ", roadName);
     if (roadName && roadName.length > 3) {
