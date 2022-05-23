@@ -178,7 +178,7 @@
                   {item.roadName}
                 </div>
                 <div class="my-2" style="font-size: 1.2em;">
-                  Bus Stop Code: <span
+                  <span
                     class="hoverItem"
                     style="font-size: 1.2em; color: red; text-decoration: underline;"
                     on:click={() => handleBusStopCodeClick(item.busStopCode)}
