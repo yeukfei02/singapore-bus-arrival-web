@@ -1,6 +1,6 @@
 # singapore-bus-arrival-web
 
-a web to check singapore bus arrival
+a web to check singapore bus arrival (新加坡巴士到站時間Web)
 
 url: <https://singapore-bus-arrival-web.vercel.app/>
 
